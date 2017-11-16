@@ -9,8 +9,16 @@ VERSION=7.2.0
 #VERSION="{$VERSION:-7.1.0}"
 BUILD_DIR=gcc-$VERSION-build
 THREADS=`grep -c ^processor /proc/cpuinfo`
+ARCH=`uname -m`
 
-echo GCC $VERSION
+if [ $ARCH == "x86_64" ]
+then
+ ARCH=x86_64-linux-gnu
+else 
+ ARCH=i686-linux-gnu
+fi
+
+echo GCC $VERSION building for $ARCH
 
 create_opt() {
     sudo mkdir redistribute 2> /dev/null
@@ -46,7 +54,8 @@ build() {
     cd $BUILD_DIR
 
     set -euo pipefail #http://redsymbol.net/articles/unofficial-bash-strict-mode/
-    ../gcc-$VERSION/configure --prefix=/opt/gcc-$VERSION -v --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --enable-checking=release --enable-languages=c,c++,fortran --disable-multilib --program-suffix=-$VERSION
+
+    ../gcc-$VERSION/configure --prefix=/opt/gcc-$VERSION -v --build=$ARCH --host=$ARCH --target=$ARCH --enable-checking=release --enable-languages=c,c++,fortran --disable-multilib --program-suffix=-$VERSION
     make -j $THREADS
     set +euo
 }
