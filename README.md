@@ -25,9 +25,9 @@ Create machine with few GB of ram and few cores (later it can be increased). The
 
 ## Install base debian
 When installing the distribution use the default settings except few cases:
-* Root password:vagrant
-* user name:vagrant
-* user password:vagrant
+* Root password:**vagrant**
+* user name:**vagrant**
+* user password:**vagrant**
 * Install the standard base system + SSH server as shown in the in image below:
 ![screenshot of the package selection](/images/softwareSelection.png)
 
@@ -43,7 +43,7 @@ chmod a+x prepareDistribution.sh
 ./prepareDistribution.sh
 ```
 
-It will ask for root password which should be vagrant and install decent amount of packages. And then reboot the machine, if everything goes well you should boot into KDM. With vagrant/vagrant you should log into a desktop enviroment
+It will ask for root password which should be **vagrant** and install decent amount of packages. And then reboot the machine, if everything goes well you should boot into KDM. With user vagrant and password vagrant you should log into a desktop enviroment (you could enable automatic login if you wish)
 
 # Configuring KDE
 Just removing unecesarry things so it will not take as much resources:
