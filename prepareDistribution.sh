@@ -41,4 +41,8 @@ chmod a+x ./gcc-tests/test-toolchain.sh
 
 #clean downloaded packages
 sudo apt-get clean
+
+echo "Everything done, press enter to reboot"
+read line
+
 sudo reboot
