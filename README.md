@@ -15,10 +15,10 @@ Download the archive of the official DVD ISO installers of Debian 6 jessie:
 [jessie 64bit ISO](https://cdimage.debian.org/cdimage/archive/6.0.10/amd64/iso-dvd/)
 
 ## VirtualBox Settings compatible with vagrant
-Create machine with few GB of ram and few cores (later it can be increased).
-* Enable I/O APIC
+Create machine with few GB of ram and few cores (later it can be increased). The idea is making the first image less resource demanding and generic, and after publishing the image then increasing to the full extend. The inner script do detect  how many threads are allocated to the VM and they do increase the build speeds. If the user is not interested in the vagrant publishing, then the large VM can be generated right now.
+* Enable I/O APIC - for to support multicore systems
 * Disable audio
-* Disable USB
+* Disable USB - not needed with vagrant (but might be needed for the GUI mouse to be usable)
 * Disable floppy drive
 * For HDD storage use **VMDK** format around 60GB of size
 * For networking use NAT, but in advanced add **portforwaring** (Name:SSH hostPort:2222 guestPort:22)
