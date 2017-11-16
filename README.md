@@ -36,7 +36,8 @@ When installing the distribution use the default settings except few cases:
 After the distribution is installed fetch the first stage script and run it:
 
 ```bash
-wget --no-check-certificate \ https://raw.githubusercontent.com/AntonKrug/portableDebianBuild/master/prepareDistribution.sh
+wget --no-check-certificate \ 
+https://raw.githubusercontent.com/AntonKrug/portableDebianBuild/master/prepareDistribution.sh
 
 chmod a+x prepareDistribution.sh
 ./prepareDistribution.sh
