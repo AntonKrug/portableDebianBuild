@@ -20,7 +20,7 @@ Create machine with few GB of ram and few cores (later it can be increased). The
 * Disable audio
 * Disable USB - not needed with vagrant (but might be needed for the GUI mouse to be usable)
 * Disable floppy drive
-* For HDD storage use **VMDK** format around 60GB of size
+* For HDD storage use **VMDK** format around 60GB of size. It's not needed, but it's hard to resize the partition so it's good to have it ready for any future projects users will build with this.
 * For networking use NAT, but in advanced add **portforwaring** (Name:SSH hostPort:2222 guestPort:22)
 
 ## Install base debian
