@@ -20,14 +20,16 @@ sudo apt-get -y install kde-full
 #if gnome was not selected probably not needed, but just to be sure
 sudo apt-get -y purge virtualbox-ose-guest-x11 virtualbox-ose-guest-utils 
 
+echo "Adding vagrant key"
 mkdir -p /home/vagrant/.ssh
 chown -R vagrant /home/vagrant/.ssh
 chmod 0700 /home/vagrant/.ssh
 wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
 chmod 0600 /home/vagrant/.ssh/authorized_keys
 
-sudo echo "AuthorizedKeysFile %h/.ssh/authorized_keys" >> /etc/ssh/sshd_config
+echo "AuthorizedKeysFile %h/.ssh/authorized_keys" | sudo tee -a /etc/apt/sources.list
 sudo /etc/init.d/ssh restart
+
 
 cd ~
 git clone https://github.com/AntonKrug/portableDebianBuild
