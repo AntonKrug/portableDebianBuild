@@ -109,8 +109,8 @@ sudo reboot
 cd ~
 git clone https://github.com/AntonKrug/portableDebianBuild
 cd portableDebianBuild
-chmod a+x gcc-download-build-install
-./gcc-download-build-install
+chmod a+x ./gcc-download-build-install.sh
+./gcc-download-build-install.sh
 ```
 
 # Publishing Vagrant image
