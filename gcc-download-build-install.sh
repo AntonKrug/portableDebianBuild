@@ -21,8 +21,8 @@ fi
 echo GCC $VERSION building for $ARCH
 
 create_opt() {
-    sudo mkdir redistribute 2> /dev/null
-    sudo chown vagrant:vagrant redistribute 2> /dev/null
+    sudo chown vagrant:vagrant /opt
+    sudo mkdir /opt/redistribute 2> /dev/null
 }
 
 clean() {
@@ -81,6 +81,7 @@ run_test() {
     
     cd ~/portableDebianBuild
     cd gcc-tests
+    chmod a+x ./test-toolchain.sh
     ./test-toolchain.sh $VERSION
 }
 
