@@ -119,5 +119,5 @@ Follow these instructions:
 
 [Building vagrant box from start](https://www.engineyard.com/blog/building-a-vagrant-box-from-start-to-finish)
 
-Only the instructions should be followed from the "Install the vagrant key" section.
+The instructions should be followed only from the "Package the box" section and below.
 
