@@ -79,9 +79,7 @@ run_test() {
     export PATH=/opt/gcc-$VERSION/bin:$PATH
     export LD_LIBRARY_PATH=/opt/gcc-$VERSION/lib64:$LD_LIBRARY_PATH
     
-    cd ~/portableDebianBuild
-    cd gcc-tests
-    chmod a+x ./test-toolchain.sh
+    cd ~/portableDebianBuild/gcc-tests
     ./test-toolchain.sh $VERSION
 }
 

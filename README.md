@@ -106,10 +106,7 @@ sudo reboot
 # Building gcc
 
 ```bash
-cd ~
-git clone https://github.com/AntonKrug/portableDebianBuild
-cd portableDebianBuild
-chmod a+x ./gcc-download-build-install.sh
+cd ~/portableDebianBuild
 ./gcc-download-build-install.sh
 ```
 
