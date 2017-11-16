@@ -65,16 +65,20 @@ Just removing unecesarry things so it will not take as much resources:
                 * Workspace -> Air for netbooks
                 * Fine Tuning -> Low display resolution and low CPU
             * Fonts -> Use anti-aliasing = Disabled
-        * Advanced -> Session Manager
-            * Start with an empty sessions
-        * Advanced -> Service manager
-            * Disable services:
-                * PowerDevil
-                * Update notifier
-                * Nepomuk
+        * Advanced
+            * Session Manager
+                * Start with an empty sessions
+            * Service manager
+                * Disable services:
+                    * PowerDevil
+                    * Update notifier
+                    * Nepomuk
+            * Power Managment
+                * Do not lock screen on resume
+                * Do not let power devil manage powersaving
     * Konsole -> Settings -> Edit current profile -> Appearance -> Disable font smoothing
 
-# Compiling VirtualBox Guest Additions
+# VirtualBox Guest Additions
 
 In the VirtualBox click Devices -> Inser Guest Additions CD image...
 
@@ -94,11 +98,26 @@ sudo usermod -aG vboxsf vagrant
 sudo reboot
 ```
 
+## Using the Guest Additions
+
+* Devices -> Shared Clipboard -> Bidirectional
+* Devices -> Shared Folders (if you desire so)
 
 # Building gcc
 
 ```bash
+cd ~
 git clone https://github.com/AntonKrug/portableDebianBuild
 cd portableDebianBuild
+chmod a+x gcc-download-build-install
 ./gcc-download-build-install
 ```
+
+# Publishing Vagrant image
+
+Follow these instructions:
+
+[Building vagrant box from start](https://www.engineyard.com/blog/building-a-vagrant-box-from-start-to-finish)
+
+Only the instructions should be followed from the "Install the vagrant key" section.
+
