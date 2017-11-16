@@ -4,10 +4,10 @@ VERSION=7.2.0
 
 CUSTOM_PREFIX=/opt/gcc-$VERSION/
 
-BIT=`uname -m`
+MACHINE=`uname -m`
 CUSTOM_LIB="$CUSTOM_PREFIX/lib"
 
-if [ $BIT == "x86_64" ]
+if [ $MACHINE == "x86_64" ]
 then
     CUSTOM_LIB="$CUSTOM_PREFIX/lib64"
 fi
@@ -21,7 +21,7 @@ env | grep PATH
 echo "Adding custom enviroment variables to force the gcc $VERSION when using make"
 
 
-CUSTOM_GCC=$CUSTOM_PREFIX/bin/i686-linux-gnu
+CUSTOM_GCC=$CUSTOM_PREFIX/bin/$MACHINE-linux-gnu
 export CXX=${CUSTOM_GCC}-g++-$VERSION
 export CC=${CUSTOM_GCC}-gcc-$VERSION
 export AS=${CUSTOM_GCC}-as-$VERSION
