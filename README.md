@@ -119,3 +119,10 @@ Follow these instructions:
 
 The instructions should be followed only from the "Package the box" section and below.
 
+# Usage 
+
+The gcc 7.2 is in the /opt/gcc-7.2.0, to use it run the prepareEnviroment.sh which will put it into the path and then it does create enviroment variables pointing to the custom toolchain for these:
+
+CXX, CC, AS, AR, NM, LD, OBJDUMP, OBJCOPY, RANLIB, STRIP
+
+Use the updateScripts.sh from time to time to make sure the scripts are up-to-date
