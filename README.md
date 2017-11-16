@@ -100,4 +100,5 @@ sudo reboot
 ```bash
 git clone https://github.com/AntonKrug/portableDebianBuild
 cd portableDebianBuild
+./gcc-download-build-install
 ```
