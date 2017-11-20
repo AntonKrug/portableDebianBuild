@@ -19,6 +19,7 @@ echo "Custom paths added"
 env | grep PATH
 
 echo "Adding custom enviroment variables to force the gcc $VERSION when using make"
+echo "Using these LIBs $CUSTOM_LIB"
 
 
 CUSTOM_GCC=$CUSTOM_PREFIX/bin/$MACHINE-linux-gnu
@@ -35,6 +36,8 @@ export STRIP=${CUSTOM_GCC}-strip-$VERSION
 
 
 #export LDFLAGS="-static -L $CUSTOM_LIB"
+export LDFLAGS="-static-libstdc++ -static-libgcc"
+
 
 export THREADS=`grep -c ^processor /proc/cpuinfo`
 
@@ -42,3 +45,35 @@ echo Threads detected: $THREADS and stored into \$THREADS variable
 echo To take full advantage use: make -j \$THREADS 
 
 bash
+
+
+#   GNU nano 2.2.4                                                                File: /home/vagrant/cppcheck-1.81/build.sh                                                                                                                                      
+
+# #!/bin/bash
+
+# VERSION=7.2.0
+# CROSS_COMPILE=/usr/bin/i586-mingw32msvc
+
+# export CXX=${CROSS_COMPILE}-g++
+# export CC=${CROSS_COMPILE}-gcc
+# export AS=${CROSS_COMPILE}-as
+# export AR=${CROSS_COMPILE}-ar
+# export NM=${CROSS_COMPILE}-nm
+# export LD=${CROSS_COMPILE}-ld
+# export OBJDUMP=${CROSS_COMPILE}-objdump
+# export OBJCOPY=${CROSS_COMPILE}-objcopy
+# export RANLIB=${CROSS_COMPILE}-ranlib
+# export STRIP=${CROSS_COMPILE}-strip
+
+# export PATH="/usr/i586-mingw32msvc/bin:$PATH"
+
+# #export LDFLAGS="-static"
+
+# make clean
+# make -j14
+# echo "checking build"
+# ldd cppcheck
+
+# #bash
+
+
