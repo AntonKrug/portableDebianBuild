@@ -70,10 +70,9 @@ download() {
 }
 
 build() {
-    echo build
-    
-    
-    #binutils
+    echo "------------------- builds ------------------"
+
+    echo "------------------- binutils ------------------"
     mkdir ~/mingw-build/binutils-2.29/build
     cd ~/mingw-build/binutils-2.29/build
     set -euo pipefail 
@@ -84,7 +83,7 @@ build() {
     make install
     set +euo
     
-    #mingw headers
+    echo "------------------- mingw headers ------------------"
     mkdir ~/mingw-build/mingw-w64-v5.0.3/build
     cd ~/mingw-build/mingw-w64-v5.0.3/build
     set -euo pipefail 
@@ -94,18 +93,29 @@ build() {
     make install
     set +euo
 
-    # symlinks
+    echo "------------------- symlinks ------------------"
     mkdir -p /usr/local/x86_64-w64-mingw32/lib32
     ln -s /usr/local/x86_64-w64-mingw32/lib /usr/local/x86_64-w64-mingw32/lib64
 
-    #gcc
-    mkdir ~/gcc-$VERSION/build
-    cd ~/gcc-$VERSION/build
+    echo "------------------- gcc 1st stage ------------------"
+    mkdir ~/mingw-build/gcc-$VERSION/build
+    cd ~/mingw-build/gcc-$VERSION/build
+    set -euo pipefail 
     ../configure --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-version-specific-runtime-libs --enable-shared --enable-fully-dynamic-string
     make all-gcc -j$THREADS
     sudo make install
+    set +euo
 
+    echo "------------------- mingw crt ------------------"
+    cd ~/mingw-build/mingw-w64-v5.0.3/build
+    set -euo pipefail 
+    ../configure --disable-nls --host=x86_64-w64-mingw32 --enable-experimental --prefix=/usr/local/x86_64-w64-mingw32
+    make -j$THREADS
+    make install
+    set +euo
 
+    # echo "------------------- gcc 2nd pass ------------------"
+    # cd ~/mingw-build/gcc-$VERSION/build
 
     #set -euo pipefail
     #../gcc-$VERSION/configure --prefix=/opt/gcc-$VERSION -v --build=$ARCH --host=$ARCH --target=$ARCH --enable-checking=release --enable-languages=c,c++,fortran --disable-multilib --program-suffix=-$VERSION
