@@ -111,7 +111,8 @@ build() {
     #../configure --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-version-specific-runtime-libs --enable-shared --enable-fully-dynamic-string
     #https://sourceforge.net/p/mingw-w64/mailman/mingw-w64-public/thread/4C884EE7.7060009@users.sourceforge.net/
     #../configure --with-sysroot=/usr/local/ --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-shared --enable-fully-dynamic-string
-    ../configure --with-sysroot=/usr/local/ --prefix=/usr/local/ --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-shared --enable-fully-dynamic-string
+    #../configure --with-sysroot=/usr/local/ --prefix=/usr/local/ --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-shared --enable-fully-dynamic-string
+    ../configure --with-sysroot=/usr/local/ --prefix=/usr/local/ --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib  --enable-targets=all --enable-shared --enable-fully-dynamic-string
     make all-gcc -j$THREADS
     #sudo make install-gcc
     make install-gcc
@@ -121,7 +122,7 @@ build() {
     cd ~/mingw-build/mingw-w64-v5.0.3/build
     set -euo pipefail 
     #../configure --with-sysroot=/usr/local/ --prefix=/usr/local/x86_64-w64-mingw32 --disable-nls --host=x86_64-w64-mingw32 --enable-experimental --enable-lib32 
-    ../configure --with-sysroot=/usr/local/ --prefix=/usr/local/x86_64-w64-mingw32 --disable-nls --host=x86_64-w64-mingw32 --enable-experimental 
+    ../configure --with-sysroot=/usr/local/ --prefix=/usr/local/x86_64-w64-mingw32 --host=x86_64-w64-mingw32  
     make -j$THREADS
     make install
     set +euo
