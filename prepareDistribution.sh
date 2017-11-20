@@ -34,9 +34,7 @@ sudo /etc/init.d/ssh restart
 cd ~
 git clone https://github.com/AntonKrug/portableDebianBuild
 cd portableDebianBuild
-chmod a+x ./gcc-download-build-install.sh
-chmod a+x ./zeroOut.sh
-chmod a+x ./gcc-tests/test-toolchain.sh
+chmod a+x *.sh
 
 
 #clean downloaded packages
