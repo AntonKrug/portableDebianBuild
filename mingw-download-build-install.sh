@@ -8,7 +8,6 @@
  
 
 VERSION=7.2.0
-BUILD_DIR=gcc-$VERSION-build
 THREADS=`grep -c ^processor /proc/cpuinfo`
 ARCH=`uname -m`
 
@@ -75,27 +74,37 @@ build() {
     
     
     #binutils
-    cd ~/mingw-build/binutils-2.29
-    mkdir build
-    cd build
+    mkdir ~/mingw-build/binutils-2.29/build
+    cd ~/mingw-build/binutils-2.29/build
     set -euo pipefail 
     #../configure --prefix=/opt/mingw64 --target=x86_64-w64-mingw32 --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32
     #../configure --target=x86_64-w64-mingw32 --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32
-    ../configure --prefix=/opt/mingw64 --target=x86_64-w64-mingw32 --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32
- --target=x86_64-w64-mingw32 --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32 --with-system-zlib
+    ../configure --prefix=/usr/local/x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32 --with-system-zlib
     make -j$THREADS
     make install
     set +euo
     
     #mingw headers
-    cd ~/mingw-build/mingw-w64-v5.0.3
-    mkdir build
-    cd build
+    mkdir ~/mingw-build/mingw-w64-v5.0.3/build
+    cd ~/mingw-build/mingw-w64-v5.0.3/build
     set -euo pipefail 
-    ../mingw-w64-headers/configure --prefix=/opt/mingw64 --host=x86_64-w64-mingw32
+    #../mingw-w64-headers/configure --prefix=/opt/mingw64 --host=x86_64-w64-mingw32
     #../mingw-w64-headers/configure --host=x86_64-w64-mingw32
+    ../mingw-w64-headers/configure --prefix=/usr/local/x86_64-w64-mingw32 --host=x86_64-w64-mingw32
     make install
     set +euo
+
+    # symlinks
+    mkdir -p /usr/local/x86_64-w64-mingw32/lib32
+    ln -s /usr/local/x86_64-w64-mingw32/lib /usr/local/x86_64-w64-mingw32/lib64
+
+    #gcc
+    mkdir ~/gcc-$VERSION/build
+    cd ~/gcc-$VERSION/build
+    ../configure --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-version-specific-runtime-libs --enable-shared --enable-fully-dynamic-string
+    make all-gcc -j$THREADS
+    sudo make install
+
 
 
     #set -euo pipefail
