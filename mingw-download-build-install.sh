@@ -43,7 +43,7 @@ clean_extracted() {
 }
 
 clean_build() {
-    echo clean extracted
+    echo clean build folders
     
     rm -rf ~/mingw-build/gcc-$VERSION/build 2> /dev/null
     rm -rf ~/mingw-build/binutils-2.29/build 2> /dev/null
@@ -57,20 +57,24 @@ download() {
     cd ~/mingw-build
 
     wget -c http://gcc.parentingamerica.com/releases/gcc-$VERSION/gcc-$VERSION.tar.gz -O gcc-$VERSION.tar.gz
+    echo "Extracting..."
     tar -xzf gcc-$VERSION.tar.gz
     cd gcc-$VERSION
+    echo "Getting GCC prerequisites..."
     ./contrib/download_prerequisites
     cd ..
 
     wget -c --no-check-certificate https://ftp.gnu.org/gnu/binutils/binutils-2.29.tar.xz -O binutils-2.29.tar.xz
+    echo "Extracting..."
     tar -xJf binutils-2.29.tar.xz
 
     wget -c --no-check-certificate https://downloads.sourceforge.net/project/mingw-w64/mingw-w64/mingw-w64-release/mingw-w64-v5.0.3.zip -O mingw-w64-v5.0.3.zip
-    unzip mingw-w64-v5.0.3.zip
+    echo "Extracting..."
+    unzip -o mingw-w64-v5.0.3.zip
 }
 
 build() {
-    echo "------------------- builds ------------------"
+    echo "------------------- build... ------------------"
 
     echo "------------------- binutils ------------------"
     mkdir ~/mingw-build/binutils-2.29/build
@@ -94,14 +98,16 @@ build() {
     set +euo
 
     echo "------------------- symlinks ------------------"
-    mkdir -p /usr/local/x86_64-w64-mingw32/lib32
-    ln -s /usr/local/x86_64-w64-mingw32/lib /usr/local/x86_64-w64-mingw32/lib64
+    #mkdir -p /usr/local/x86_64-w64-mingw32/lib32
+    #ln -s /usr/local/x86_64-w64-mingw32/lib /usr/local/x86_64-w64-mingw32/lib64
 
     echo "------------------- gcc 1st stage ------------------"
     mkdir ~/mingw-build/gcc-$VERSION/build
     cd ~/mingw-build/gcc-$VERSION/build
     set -euo pipefail 
-    ../configure --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-version-specific-runtime-libs --enable-shared --enable-fully-dynamic-string
+    #../configure --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-version-specific-runtime-libs --enable-shared --enable-fully-dynamic-string
+    #https://sourceforge.net/p/mingw-w64/mailman/mingw-w64-public/thread/4C884EE7.7060009@users.sourceforge.net/
+    ../configure --disable-nls --target=x86_64-w64-mingw32 --enable-languages=c,c++ --with-system-zlib --enable-multilib --enable-shared --enable-fully-dynamic-string
     make all-gcc -j$THREADS
     sudo make install
     set +euo
@@ -116,6 +122,9 @@ build() {
 
     # echo "------------------- gcc 2nd pass ------------------"
     # cd ~/mingw-build/gcc-$VERSION/build
+    # set -euo pipefail 
+    # make -j$THREADS
+    # set +euo
 
     #set -euo pipefail
     #../gcc-$VERSION/configure --prefix=/opt/gcc-$VERSION -v --build=$ARCH --host=$ARCH --target=$ARCH --enable-checking=release --enable-languages=c,c++,fortran --disable-multilib --program-suffix=-$VERSION
