@@ -140,9 +140,18 @@ build() {
     set +euo
 }
 
-# add_pernamently_to_bash_rc() {
+add_pernamently_to_bashrc() {
+    foundPath=`cat ~/.bashrc | grep -c "^#\ adding\ mingw\ to\ the\ path"`
+    if [ "$foundPath" == "0" ]
+    then
+        echo "" >> ~/.bashrc
+        echo "# adding mingw to the path" >> ~/.bashrc
+        echo "export PATH=$MGW_PREFIX/bin:\$PATH" >> ~/.bashrc
+        echo "" >> ~/.bashrc
+    fi
 
-# }
+    source ~/.bashrc
+}
 
 #clean_downloads
 #clean_extracted
@@ -151,4 +160,4 @@ clean_build
 
 download
 build
-# add_pernamently_to_bash_rc
+add_pernamently_to_bashrc
