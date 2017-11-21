@@ -140,9 +140,9 @@ build() {
     set +euo
 }
 
-add_pernamently_to_bash_rc() {
+# add_pernamently_to_bash_rc() {
 
-}
+# }
 
 #clean_downloads
 #clean_extracted
@@ -151,4 +151,4 @@ clean_build
 
 download
 build
-add_pernamently_to_bash_rc
+# add_pernamently_to_bash_rc
