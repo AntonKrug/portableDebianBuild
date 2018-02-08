@@ -134,10 +134,13 @@ Use the updateScripts.sh from time to time to make sure the scripts are up-to-da
 Building more portable version of the 32 bit uWebSockets library:
 
 ```bash
+mkdir uWebScoketPortableBuildVagrant
+cd uWebScoketPortableBuildVagrant
 vagrant init antonkrug/debian6-32-portable-build --box-version 1.0.0
 vagrant up
 vagrant ssh
 
+# now in the vagrant prompt
 sudo apt-get install zlib1g-dev
 
 export PATH=/opt/gcc-7.2.0/bin/:$PATH
