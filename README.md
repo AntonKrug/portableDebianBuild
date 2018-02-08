@@ -158,4 +158,8 @@ git clone https://github.com/uNetworking/uWebSockets.git
 cd uWebSockets
 make
 cp libuWS.so /vagrant/   # will share the result to the host
+
+exit # leave vagrant enviroment
+
+vagrant halt # shutdown the vm
 ```
