@@ -126,3 +126,33 @@ The gcc 7.2 is in the /opt/gcc-7.2.0, to use it run the prepareEnviroment.sh whi
 CXX, CC, AS, AR, NM, LD, OBJDUMP, OBJCOPY, RANLIB, STRIP
 
 Use the updateScripts.sh from time to time to make sure the scripts are up-to-date
+
+# Use cases
+
+## uWebSockets
+
+Building more portable version of the 32 bit uWebSockets library:
+
+```bash
+vagrant init antonkrug/debian6-32-portable-build --box-version 1.0.0
+vagrant up
+vagrant ssh
+
+sudo apt-get install zlib1g-dev
+
+export PATH=/opt/gcc-7.2.0/bin/:$PATH
+export LD_LIBRARY_PATH=/opt/gcc-7.2.0/lib:$LD_LIBRARY_PATH
+export CXX=gcc-7.2.0
+
+wget https://www.openssl.org/source/openssl-1.1.0g.tar.gz
+tar xvf openssl-1.1.0g.tar.gz 
+cd openssl-1.1.0g
+./config
+make -j32  #or whatever cores you have
+sudo make install
+
+git clone https://github.com/uNetworking/uWebSockets.git
+cd uWebSockets
+make
+cp libuWS.so /vagrant/   # will share the result to the host
+```
