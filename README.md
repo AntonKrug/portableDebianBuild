@@ -127,7 +127,7 @@ CXX, CC, AS, AR, NM, LD, OBJDUMP, OBJCOPY, RANLIB, STRIP
 
 Use the updateScripts.sh from time to time to make sure the scripts are up-to-date
 
-# Use cases
+# Use cases - examples how to build something with this system
 
 ## uWebSockets
 
@@ -157,9 +157,24 @@ sudo make install
 git clone https://github.com/uNetworking/uWebSockets.git
 cd uWebSockets
 make
-cp libuWS.so /vagrant/   # will share the result to the host
+cp libuWS.so /vagrant/   # will share the result from the VM to the host filesystem
 
 exit # leave vagrant enviroment
 
 vagrant halt # shutdown the vm
 ```
+
+To install it by hand on a 64bit machine the multilib has to be enabled
+
+```bash
+sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install gcc-multilib g++-multilib libc6-dev-i386 gdb-multiarch
+sudo apt-get install libssl-dev:i386 libuv1:i386 zlib1g-dev:i386
+```
+
+Because the original makefile doesn't support compilation and installation from 64bit system as a 32bit system (compilation can be achieved by **export CFLAGS="-m32"** and **export LDFLAGS="-m32"** before running make, but the installation had to be done by hand anyway).
+
+* copy all includes to /usr/include/i386-linux-gnu/uWS/\*.h
+* copy the library to /usr/lib/i386-linux-gnu/libuWS.so
+
