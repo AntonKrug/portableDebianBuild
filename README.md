@@ -127,7 +127,7 @@ CXX, CC, AS, AR, NM, LD, OBJDUMP, OBJCOPY, RANLIB, STRIP
 
 Use the updateScripts.sh from time to time to make sure the scripts are up-to-date
 
-# Use cases - examples how to build something with this system
+# Use cases - examples how to build projects
 
 ## uWebSockets
 
@@ -141,16 +141,16 @@ vagrant up
 vagrant ssh
 
 # now in the vagrant prompt
-sudo apt-get install zlib1g-dev
+sudo apt-get install zlib1g-dev  # old zlib is good enough for uWebSockets and debian package can be used.
 
 export PATH=/opt/gcc-7.2.0/bin/:$PATH
 export LD_LIBRARY_PATH=/opt/gcc-7.2.0/lib:$LD_LIBRARY_PATH
 export CXX=gcc-7.2.0
 
-wget https://www.openssl.org/source/openssl-1.1.0g.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.0g.tar.gz # but Debian 6 has opensll 0.9 while uWebSockets needs 1.x.x so it needs to be compiled from the sources
 tar xvf openssl-1.1.0g.tar.gz 
 cd openssl-1.1.0g
-./config
+./config no-shared --prefix=/usr
 make -j32  #or whatever cores you have
 sudo make install
 
