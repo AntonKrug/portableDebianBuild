@@ -178,3 +178,22 @@ Because the original makefile doesn't support compilation and installation from 
 * copy all includes to /usr/include/i386-linux-gnu/uWS/\*.h
 * copy the library to /usr/lib/i386-linux-gnu/libuWS.so
 
+## TPL - Efficient serialization in C
+
+In this case TPL will not need anything from newer GCC so even the Debina 6 bundled GCC should be enough. Going for a static 32bit build:
+
+```
+mkdir vagrantTplBuild
+cd vagrantTplBuild
+vagrant init antonkrug/debian6-32-portable-build --box-version 1.0.0
+vagrant up
+vagrant ssh
+
+git clone https://github.com/troydhanson/tpl
+cd tpl
+./bootstrap
+./configure LDFLAGS="-static"
+make
+ ls -la src/.libs/
+cp src/.libs/*.* /vagrant/
+```
