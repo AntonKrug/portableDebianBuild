@@ -197,3 +197,16 @@ make
  ls -la src/.libs/
 cp src/.libs/*.* /vagrant/
 ```
+
+## cmake projects
+
+If you require newer cmake and you can't download newest binary (because they are 64bit only and you might need it on 32bit system). Then again run the **~/portableDebianBuild/prepareEnviroment.sh** to have the enviroment setup correctly and then just download/configure/compile the new cmake. Then all projects requiring this cmake can use it from the local location.
+
+```
+wget --no-check-certificate https://cmake.org/files/v3.11/cmake-3.11.0.tar.gz
+tar xvfz cmake-3.11.0.tar.gz
+cd cmake-3.11.0
+./configure
+make
+./bin/cmake --version
+```
