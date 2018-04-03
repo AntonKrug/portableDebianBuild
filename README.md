@@ -121,7 +121,7 @@ The instructions should be followed only from the "Package the box" section and 
 
 # Usage 
 
-The gcc 7.2 is in the /opt/gcc-7.2.0, to use it run the **prepareEnviroment.sh** which will put it into the path and then it does create enviroment variables pointing to the custom toolchain for these:
+The gcc 7.2 is in the /opt/gcc-7.2.0, to use it run the **~/portableDebianBuild/prepareEnviroment.sh** which will put it into the path and then it does create enviroment variables pointing to the custom toolchain for these:
 
 CXX, CC, AS, AR, NM, LD, OBJDUMP, OBJCOPY, RANLIB, STRIP
 
