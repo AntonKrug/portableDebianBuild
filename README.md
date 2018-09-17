@@ -210,3 +210,15 @@ cd cmake-3.11.0
 make
 ./bin/cmake --version
 ```
+
+## cppcheck
+
+- The 64bit **1.2** vagrant box contains the mingw attemps in which broke something, so for cppcheck I had to revert to **1.0** pre-mingw box. 
+
+- The **wget --no-check-certificate** doesn't work in this case and had to download the source code externally and shared throught the mounted share.
+
+- Sharing the code with the guest might confuse somebody, as it might not be mounted on the /vagrant, but **/media/sf_vagrant/**. Possibly it might have to be mounted by hand.
+
+- The version 1.0 has not up-to-date scripts, nor mechanism to update itself. This means that it's needed to download this repository manualy into it this VM to get the **prepareEnviroment.sh** as it's still required to build this without errors.
+
+- Then running make inside the source folder should be enough to build the cppcheck (no *./configure* nor other steps involved).
