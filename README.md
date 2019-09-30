@@ -222,3 +222,19 @@ make
 - The version 1.0 has not up-to-date scripts, nor mechanism to update itself. This means that it's needed to download this repository manualy into it this VM to get the **prepareEnviroment.sh** as it's still required to build this without errors.
 
 - Then running make inside the source folder should be enough to build the cppcheck (no *./configure* nor other steps involved).
+
+## Alternatives
+
+If a RHEL 6 compatibility is not needed and there are problems with this setup then Ubuntu 14 might be good enough and installing some more recent gcc on it:
+https://askubuntu.com/a/581497/426524
+
+There is fairly large selection of GCCs:
+https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test
+
+```
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install gcc-8 g++-8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+sudo update-alternatives --config gcc
+```
